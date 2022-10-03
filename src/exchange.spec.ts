@@ -209,8 +209,6 @@ describe('CurrencyExchange', () => {
 
       const result = exchange.trade();
 
-      console.log(result);
-
       expect(result.isComplete()).toBeTruthy();
       expect(result.buyer).toEqual({
         keys: 0,
@@ -540,6 +538,46 @@ describe('CurrencyExchange', () => {
       expect(result1.seller).toEqual(result2.seller);
       expect(result1.missing).toEqual(result2.missing);
       expect(result1.missingChange).toEqual(result2.missingChange);
+    });
+
+    it('Uses the fewest items possible', () => {
+      const exchange = new CurrencyExchange({
+        buyInventory: {
+          keys: 0,
+          ref: 3,
+          rec: 3,
+          scrap: 0,
+          craftWep: 0,
+        },
+        sellInventory: {
+          keys: 0,
+          ref: 0,
+          rec: 0,
+          scrap: 5,
+          craftWep: 0,
+        },
+        price: { keys: 0, metal: 2.88 },
+        keyPrice: 50,
+      });
+
+      const result = exchange.trade();
+
+      expect(result.isComplete()).toBeTruthy();
+      expect(result.buyer).toEqual({
+        keys: 0,
+        ref: 3,
+        rec: 0,
+        scrap: 0,
+        craftWep: 0,
+      });
+      expect(result.seller).toEqual({
+        keys: 0,
+        ref: 0,
+        rec: 0,
+        scrap: 1,
+        craftWep: 0,
+      });
+      expect(result.missing).toEqual(0);
     });
 
     describe('convertByIntent', () => {
