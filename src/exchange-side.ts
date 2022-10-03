@@ -15,6 +15,7 @@ export class CurrencyExchangeSide {
       ref: 0,
       rec: 0,
       scrap: 0,
+      craftWep: 0,
     },
     inventory,
     exchange,
@@ -35,7 +36,13 @@ export class CurrencyExchangeSide {
   }
 
   fillCurrencySide() {
-    const currencies: CurrencyName[] = ['keys', 'ref', 'rec', 'scrap'];
+    const currencies: CurrencyName[] = [
+      'keys',
+      'ref',
+      'rec',
+      'scrap',
+      'craftWep',
+    ];
     currencies.forEach((currency) => {
       const amount = this.getAmountToFill(currency);
 
@@ -47,7 +54,7 @@ export class CurrencyExchangeSide {
   }
 
   selectChange() {
-    const currencies: CurrencyName[] = ['rec', 'ref', 'keys'];
+    const currencies: CurrencyName[] = ['scrap', 'rec', 'ref', 'keys'];
 
     return currencies.find((currency) => {
       const currencyValue = this.exchange.getCurrencyValue(currency);
@@ -77,7 +84,13 @@ export class CurrencyExchangeSide {
 
   getCurrenciesToClean(changeCurrency: CurrencyName) {
     const changeValue = this.exchange.getCurrencyValue(changeCurrency);
-    const currencies: CurrencyName[] = ['keys', 'ref', 'rec', 'scrap'];
+    const currencies: CurrencyName[] = [
+      'keys',
+      'ref',
+      'rec',
+      'scrap',
+      'craftWep',
+    ];
     const thresholdIndex = currencies.findIndex((currency) => {
       return this.exchange.getCurrencyValue(currency) < changeValue;
     });

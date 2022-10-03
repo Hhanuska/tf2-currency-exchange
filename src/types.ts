@@ -3,6 +3,7 @@ export interface ICurrencyStore {
   ref: number;
   rec: number;
   scrap: number;
+  craftWep: number;
 }
 
 export type CurrencyName = keyof ICurrencyStore;

@@ -62,6 +62,8 @@ export class CurrencyExchange {
         return 3;
       case 'scrap':
         return 1;
+      case 'craftWep':
+        return 0.5;
     }
   }
 
