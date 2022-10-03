@@ -109,4 +109,33 @@ export class CurrencyExchangeSide {
 
     return amount > howManyCanFit ? howManyCanFit : amount;
   }
+
+  convertCurrencies() {
+    const conversions = <const>[2, 3, 3];
+    const canBeConverted = <const>['craftWep', 'scrap', 'rec', 'ref'];
+
+    for (let i = 0; i < conversions.length; i++) {
+      let changedSomething = false;
+
+      conversions.forEach((conversionRate, j) => {
+        const currency = canBeConverted[j];
+        const convertTo = canBeConverted[j + 1];
+
+        while (
+          conversionRate <= this.store[currency] &&
+          this.store[convertTo] < this.inventory[convertTo]
+        ) {
+          this.store[currency] -= conversionRate;
+          this.store[convertTo] += 1;
+          changedSomething = true;
+        }
+      });
+
+      if (!changedSomething) {
+        break;
+      }
+    }
+
+    return this;
+  }
 }

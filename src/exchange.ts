@@ -94,6 +94,9 @@ export class CurrencyExchange {
       this.buyer.missingBeforeClean = 0;
     }
 
+    this.buyer.convertCurrencies();
+    this.seller.convertCurrencies();
+
     return this.getResult();
   }
 
