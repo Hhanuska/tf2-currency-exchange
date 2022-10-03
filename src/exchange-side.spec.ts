@@ -40,4 +40,36 @@ describe('CurrencyExchangeSide', () => {
       });
     });
   });
+
+  describe('currencyConversion', () => {
+    it('Converts currencies', () => {
+      const side = new CurrencyExchangeSide({
+        store: {
+          keys: 1,
+          ref: 10,
+          rec: 10,
+          scrap: 10,
+          craftWep: 5,
+        },
+        inventory: {
+          keys: 2,
+          ref: 12,
+          rec: 11,
+          scrap: 15,
+          craftWep: 5,
+        },
+        exchange: {} as CurrencyExchange,
+      });
+
+      side.convertCurrencies();
+
+      expect(side.store).toEqual({
+        keys: 1,
+        ref: 12,
+        rec: 8,
+        scrap: 0,
+        craftWep: 1,
+      });
+    });
+  });
 });
