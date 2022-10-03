@@ -10,12 +10,14 @@ describe('CurrencyExchangeFactory', () => {
           ref: 0,
           rec: 0,
           scrap: 0,
+          craftWep: 0,
         },
         theirCurrencyInventory: {
           keys: 0,
           ref: 0,
           rec: 0,
           scrap: 0,
+          craftWep: 0,
         },
         price: { keys: 0, metal: 0 },
         keyPrice: 0,
@@ -39,12 +41,14 @@ describe('CurrencyExchangeFactory', () => {
         ref: 0,
         rec: 0,
         scrap: 2,
+        craftWep: 0,
       });
       expect(result.seller).toEqual({
         keys: 0,
         ref: 0,
         rec: 0,
         scrap: 0,
+        craftWep: 0,
       });
       expect(result.missing).toBe(0);
       expect(result.missingChange).toBe(0);
@@ -60,6 +64,7 @@ describe('CurrencyExchangeFactory', () => {
             ref: 0,
             rec: 0,
             scrap: 0,
+            craftWep: 0,
           },
           keyPrice: 0,
         }),
@@ -75,6 +80,7 @@ describe('CurrencyExchangeFactory', () => {
           ref: 25,
           rec: 3,
           scrap: 1,
+          craftWep: 0,
         },
         keyPrice: 50,
       });
@@ -85,6 +91,7 @@ describe('CurrencyExchangeFactory', () => {
           ref: 23,
           rec: 4,
           scrap: 3,
+          craftWep: 0,
         },
         intent: 'sell',
         price: { keys: 2, metal: 4 },
@@ -96,12 +103,14 @@ describe('CurrencyExchangeFactory', () => {
         ref: 23,
         rec: 4,
         scrap: 3,
+        craftWep: 0,
       });
       expect(exchange['seller']['inventory']).toEqual({
         keys: 2,
         ref: 25,
         rec: 3,
         scrap: 1,
+        craftWep: 0,
       });
     });
 
@@ -112,6 +121,7 @@ describe('CurrencyExchangeFactory', () => {
           ref: 25,
           rec: 3,
           scrap: 1,
+          craftWep: 0,
         },
         keyPrice: 50,
       });
@@ -122,6 +132,7 @@ describe('CurrencyExchangeFactory', () => {
           ref: 23,
           rec: 4,
           scrap: 3,
+          craftWep: 0,
         },
         intent: 'buy',
         price: { keys: 2, metal: 4 },
@@ -133,12 +144,14 @@ describe('CurrencyExchangeFactory', () => {
         ref: 23,
         rec: 4,
         scrap: 3,
+        craftWep: 0,
       });
       expect(exchange['buyer']['inventory']).toEqual({
         keys: 2,
         ref: 25,
         rec: 3,
         scrap: 1,
+        craftWep: 0,
       });
     });
   });
@@ -150,6 +163,7 @@ describe('CurrencyExchangeFactory', () => {
         ref: 25,
         rec: 3,
         scrap: 1,
+        craftWep: 0,
       },
       keyPrice: 50,
     });
@@ -160,6 +174,7 @@ describe('CurrencyExchangeFactory', () => {
         ref: 25,
         rec: 3,
         scrap: 1,
+        craftWep: 0,
       },
       intent: 'sell',
       price: { keys: 2, metal: 4 },
@@ -177,6 +192,7 @@ describe('CurrencyExchangeFactory', () => {
           ref: 25,
           rec: 3,
           scrap: 1,
+          craftWep: 4,
         },
         keyPrice: 50,
       });
@@ -186,6 +202,7 @@ describe('CurrencyExchangeFactory', () => {
         ref: 25,
         rec: 3,
         scrap: 1,
+        craftWep: 4,
       });
 
       factory.updateInventory({
@@ -193,6 +210,7 @@ describe('CurrencyExchangeFactory', () => {
         ref: 13,
         rec: 342,
         scrap: 3,
+        craftWep: 2,
       });
 
       expect(factory['ourCurrencyInventory']).toEqual({
@@ -200,6 +218,7 @@ describe('CurrencyExchangeFactory', () => {
         ref: 13,
         rec: 342,
         scrap: 3,
+        craftWep: 2,
       });
     });
   });
@@ -212,6 +231,7 @@ describe('CurrencyExchangeFactory', () => {
           ref: 0,
           rec: 0,
           scrap: 0,
+          craftWep: 0,
         },
         keyPrice: 50,
       });
