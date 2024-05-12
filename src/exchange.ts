@@ -11,6 +11,7 @@ import {
 export class CurrencyExchange {
   public readonly value: number;
   public readonly keyPrice: number;
+  public readonly keyPriceChange: number;
 
   private seller: CurrencyExchangeSide;
   private buyer: CurrencyExchangeSide;
@@ -20,6 +21,7 @@ export class CurrencyExchange {
     sellInventory,
     price,
     keyPrice,
+    keyPriceChange,
   }: {
     buyInventory: ICurrencyStore;
     sellInventory: ICurrencyStore;
@@ -31,8 +33,14 @@ export class CurrencyExchange {
      * Key price in metal.
      */
     keyPrice: number;
+    keyPriceChange?: number;
   }) {
+    if (!keyPriceChange) {
+      keyPriceChange = keyPrice;
+    }
+
     this.keyPrice = toScrap(keyPrice);
+    this.keyPriceChange = toScrap(keyPriceChange);
     this.value = new Currency(price).toScrap(keyPrice);
 
     this.buyer = new CurrencyExchangeSide({
@@ -52,10 +60,10 @@ export class CurrencyExchange {
     return this.seller.isComplete() && this.buyer.isComplete();
   }
 
-  getCurrencyValue(currency: CurrencyName): number {
+  getCurrencyValue(currency: CurrencyName, isChange = false): number {
     switch (currency) {
       case 'keys':
-        return this.keyPrice;
+        return !isChange ? this.keyPrice : this.keyPriceChange;
       case 'ref':
         return 9;
       case 'rec':
@@ -85,7 +93,7 @@ export class CurrencyExchange {
     this.buyer.clean(changeCurrency);
 
     this.seller.value =
-      this.getCurrencyValue(changeCurrency) - this.buyer.value;
+      this.getCurrencyValue(changeCurrency, true) - this.buyer.value;
     this.seller.fillCurrencySide();
 
     if (this.seller.isComplete()) {
